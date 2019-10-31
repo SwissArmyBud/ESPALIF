@@ -254,13 +254,11 @@ function announceWatch(){
 }
 
 function srcWatcher() {
-  announceWatch();
-  return gulp.
-    watch(
-      srcPath + "/**/*.(bamr|js|css)",
-      {ignoreInitial: false},
-      gulp.series('build', announceWatch)
-    );
+  return gulp.watch(
+           srcPath + "/**/*.(bamr|js|css)",
+           {ignoreInitial: false},
+           gulp.series('build', announceWatch)
+         );
 }
 
 gulp.task('deepClean', gulp.parallel(clean, delDist));
