@@ -247,6 +247,17 @@ function delDist(){
   return del([buildPath]);
 }
 
+function announceWatch(){
+  console.log();
+  console.log();
+  console.log(chalk.red("-- WATCHING SOURCE --"));
+}
+
+function srcWatcher() {
+  announceWatch();
+  return gulp.watch(srcPath + "/**/*.{bamr,js,css}", gulp.series('build', announceWatch));
+}
+
 gulp.task('deepClean', gulp.parallel(clean, delDist));
 gulp.task('make',
   gulp.series(
@@ -259,3 +270,4 @@ gulp.task('build', gulp.series("deepClean", "make", clean));
 gulp.task('make', gulp.series("make"));
 gulp.task('copyStatic', gulp.series(copyStatic));
 gulp.task('default', gulp.series("build"));
+gulp.task('watch', gulp.series("build", srcWatcher));
