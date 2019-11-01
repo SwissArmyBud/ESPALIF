@@ -247,15 +247,18 @@ function delDist(){
   return del([buildPath]);
 }
 
-function announceWatch(){
-  console.log();
-  console.log();
-  console.log(chalk.red("-- WATCHING SOURCE --"));
+function announceWatch(cb){
+  setTimeout(function(){
+    console.log();
+    console.log(chalk.red("-- WATCHING SOURCE --"));
+    console.log();
+  }, 100);
+  cb();
 }
 
 function srcWatcher() {
   return gulp.watch(
-           srcPath + "/**/*.(bamr|js|css)",
+             srcPath + "/**/*.(bamr|js|css)",
            {ignoreInitial: false},
            gulp.series('build', announceWatch)
          );
